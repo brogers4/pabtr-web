@@ -1,4 +1,4 @@
-<div class="login-container">
+<div class="login-container" [hidden]="submitted || loggedIn">
   <h3>Login</h3>
   <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
     <div class="form-group">
@@ -19,5 +19,14 @@
 
     <button type="submit" [disabled]="!loginForm.form.valid">Submit</button>
   </form>
-
+</div>
+<div [hidden]="!submitted || loggedIn">
+  <p>
+    Logging in as {{email}}...
+  </p>
+</div>
+<div [hidden]="!loggedIn">
+  <p>
+    Logged in successfully!
+  </p>
 </div>

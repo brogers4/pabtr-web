@@ -12,6 +12,7 @@ import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { LogoutComponent } from './logout/logout.component';
 import { BlogComponent } from './blog/blog.component';
 import { BlogDetailComponent } from './blog/blog-detail/blog-detail.component';
 
@@ -37,6 +38,7 @@ export const firebaseAuthConfig = {
     AppComponent,
     HomeComponent,
     LoginComponent,
+    LogoutComponent,
     BlogComponent,
     BlogDetailComponent
   ],

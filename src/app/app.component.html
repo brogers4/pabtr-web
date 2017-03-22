@@ -3,5 +3,6 @@
 </h1>
 <a routerLink="/home">Home</a>
 <a routerLink="/blog">Blog</a>
-<a routerLink="/login">Log In</a>
+<a routerLink="/login" *ngIf="!loggedIn">Log In</a>
+<a routerLink="/logout" *ngIf="loggedIn">Log Out</a>
 <router-outlet></router-outlet>
