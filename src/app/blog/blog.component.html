@@ -1,0 +1,6 @@
+<h3>My Blog</h3>
+<ul>
+  <li *ngFor="let blog of blogs | async">
+    <a [routerLink]="['/blog',blog.$key]">{{blog.$key}}: {{blog.title}}</a>
+  </li>
+</ul>
