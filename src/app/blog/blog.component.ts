@@ -11,7 +11,16 @@ import { BlogService } from './blog.service';
 export class BlogComponent {
   // constructor(private blogService: BlogService) { };
   blogs: FirebaseListObservable<any[]>;
-  constructor(af: AngularFire){
+  loggedIn = false;
+
+  constructor(private af: AngularFire){
     this.blogs = af.database.list('/blogs');
+    this.af.auth.subscribe(auth => {
+      if(auth !== null){
+        this.loggedIn = true;
+      } else {
+        this.loggedIn = false;
+      }
+    })
   }
 }

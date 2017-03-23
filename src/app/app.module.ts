@@ -15,6 +15,7 @@ import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { BlogComponent } from './blog/blog.component';
 import { BlogDetailComponent } from './blog/blog-detail/blog-detail.component';
+import { BlogNewComponent } from './blog/blog-new/blog-new.component';
 
 import { BlogService } from './blog/blog.service';
 
@@ -40,7 +41,8 @@ export const firebaseAuthConfig = {
     LoginComponent,
     LogoutComponent,
     BlogComponent,
-    BlogDetailComponent
+    BlogDetailComponent,
+    BlogNewComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,22 @@
+<div class="new-blog-container">
+  <h3>Create New Blog</h3>
+  <form (ngSubmit)="onSubmit(newBlogForm)" #newBlogForm="ngForm">
+    <div class="form-group">
+      <label>Title: </label>
+      <input placeholder="Title" type="text" name="title" ngModel #titleInput="ngModel" required/>
+      <div [hidden]="titleInput.valid || titleInput.pristine">
+        Title is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Content: </label>
+      <textarea placeholder="Blog Content" type="textarea" name="content" ngModel #contentInput="ngModel" required></textarea>
+      <!-- <div [hidden]="contentInput.valid || contentInput.pristine">
+        Content is required.
+      </div> -->
+    </div>
+
+    <button type="submit" [disabled]="!newBlogForm.form.valid">Submit</button>
+  </form>
+</div>
