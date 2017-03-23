@@ -17,6 +17,7 @@ import { BlogComponent } from './blog/blog.component';
 import { BlogDetailComponent } from './blog/blog-detail/blog-detail.component';
 import { BlogNewComponent } from './blog/blog-new/blog-new.component';
 
+import { AuthService } from './login/auth.service';
 import { BlogService } from './blog/blog.service';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -53,7 +54,8 @@ export const firebaseAuthConfig = {
     AppRoutingModule
   ],
   providers: [
-    BlogService
+    BlogService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

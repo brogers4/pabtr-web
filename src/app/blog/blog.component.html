@@ -4,4 +4,4 @@
     <a [routerLink]="['/blog',blog.$key]">{{blog.title}}</a>
   </li>
 </ul>
-<a *ngIf="loggedIn" [routerLink]="['/blog','new']">Create New Blog</a>
+<a *ngIf="loggedIn | async" [routerLink]="['/blog','new']">Create New Blog</a>

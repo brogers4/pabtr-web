@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { Observable } from 'rxjs/Observable';
 
+import { AuthService } from '../login/auth.service';
 import { BlogService } from './blog.service';
 
 @Component({
@@ -11,16 +13,16 @@ import { BlogService } from './blog.service';
 export class BlogComponent {
   // constructor(private blogService: BlogService) { };
   blogs: FirebaseListObservable<any[]>;
-  loggedIn = false;
+  loggedIn: Observable<Boolean>;
 
-  constructor(private af: AngularFire){
+  constructor(
+    private af: AngularFire,
+    private authService: AuthService
+  ){
     this.blogs = af.database.list('/blogs');
-    this.af.auth.subscribe(auth => {
-      if(auth !== null){
-        this.loggedIn = true;
-      } else {
-        this.loggedIn = false;
-      }
-    })
+  }
+
+  ngOnInit(){
+    this.loggedIn = this.authService.loggedIn;
   }
 }

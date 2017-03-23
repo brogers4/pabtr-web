@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { Observable } from 'rxjs/Observable';
 import { AngularFire } from 'angularfire2';
+import { AuthService } from './login/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -10,16 +12,13 @@ import { AngularFire } from 'angularfire2';
 })
 export class AppComponent {
   title = 'My App';
-  loggedIn = false;
+  loggedIn: Observable<Boolean>;
 
-  constructor(public af: AngularFire, private router: Router, private location: Location) {
-    this.af.auth.subscribe(auth => {
-      if(auth !== null){
-        this.loggedIn = true;
-        // Redirect somewhere?
-      } else {
-        this.loggedIn = false;
-      }
-    })
+  constructor(
+    private authService: AuthService
+  ) { }
+
+  ngOnInit(){
+    this.loggedIn = this.authService.loggedIn;
   }
 }
