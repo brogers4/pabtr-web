@@ -2,5 +2,5 @@
 <div *ngIf="blog">
   <h3>{{blog.title}}</h3>
   <hr>
-  <div [innerHTML]="blog.content"></div>
+  <div [innerHTML]="blog.content | safeHtml"></div>
 </div>

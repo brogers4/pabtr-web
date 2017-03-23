@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AngularFire } from 'angularfire2';
@@ -10,9 +10,29 @@ import { Blog } from '../blog';
   templateUrl: 'blog-new.component.html',
   styleUrls: ['blog-new.component.scss']
 })
-export class BlogNewComponent {
+export class BlogNewComponent implements AfterViewInit, OnDestroy {
+
+  editor;
+  content: string;
 
   constructor(private af: AngularFire, private router: Router){ }
+
+  ngAfterViewInit(){
+    tinymce.init({
+      selector: '#editor',
+      skin_url: '../../assets/skins/lightgray',
+      setup: editor => {
+        this.editor = editor;
+        editor.on('keyup', () => {
+          this.content = editor.getContent();
+        })
+      }
+    })
+  }
+
+  ngOnDestroy(){
+    tinymce.remove(this.editor);
+  }
 
   createBlog(blog: Object){
     this.af.database.list('/blogs').push(blog).then(value => {
@@ -27,7 +47,7 @@ export class BlogNewComponent {
   onSubmit(newBlogForm) {
     this.createBlog({
       title: newBlogForm.value.title,
-      content: newBlogForm.value.content
+      content: this.editor.getContent()
     });
   }
 }
