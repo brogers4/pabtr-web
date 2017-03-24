@@ -4,3 +4,5 @@ declare var module: {
 };
 
 declare var tinymce: any;
+
+declare var $:JQueryStatic;

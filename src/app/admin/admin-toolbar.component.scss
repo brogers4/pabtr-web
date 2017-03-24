@@ -1,0 +1,19 @@
+:host .admin-toolbar-container {
+  background: rgba(0,0,0,0.8);
+  color: white;
+  margin: 10px 0;
+  padding: 4px;
+  border-radius: 2px;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+}
+
+:host a {
+  color: white;
+  margin: 0 10px;
+}
+
+:host .spacer {
+  flex: 1 0 auto;
+}

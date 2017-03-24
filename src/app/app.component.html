@@ -4,5 +4,5 @@
 <a routerLink="/home">Home</a>
 <a routerLink="/blog">Blog</a>
 <a routerLink="/login" *ngIf="!(loggedIn | async)">Log In</a>
-<a routerLink="/logout" *ngIf="loggedIn | async">Log Out</a>
+<admin-toolbar></admin-toolbar>
 <router-outlet></router-outlet>

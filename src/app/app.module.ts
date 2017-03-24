@@ -17,6 +17,8 @@ import { BlogComponent } from './blog/blog.component';
 import { BlogDetailComponent } from './blog/blog-detail/blog-detail.component';
 import { BlogNewComponent } from './blog/blog-new/blog-new.component';
 
+import { AdminToolbarComponent } from './admin/admin-toolbar.component';
+
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 
 import { AuthService } from './login/auth.service';
@@ -46,7 +48,8 @@ export const firebaseAuthConfig = {
     BlogComponent,
     BlogDetailComponent,
     BlogNewComponent,
-    SafeHtmlPipe
+    SafeHtmlPipe,
+    AdminToolbarComponent
   ],
   imports: [
     BrowserModule,

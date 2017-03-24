@@ -1,0 +1,6 @@
+<div class="admin-toolbar-container" *ngIf="loggedIn | async">
+  <span>Admin Toolbar</span>
+  <span class="spacer"></span>
+  <a routerLink="/blog/new">Create New Blog</a>
+  <a routerLink="/logout">Log Out</a>
+</div>
