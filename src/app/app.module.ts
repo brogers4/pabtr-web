@@ -16,6 +16,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { BlogComponent } from './blog/blog.component';
 import { BlogDetailComponent } from './blog/blog-detail/blog-detail.component';
 import { BlogNewComponent } from './blog/blog-new/blog-new.component';
+import { BlogImageArrayComponent } from './blog/blog-image-array/blog-image-array.component';
 
 import { AdminToolbarComponent } from './admin/admin-toolbar.component';
 
@@ -47,6 +48,7 @@ export const firebaseAuthConfig = {
     LogoutComponent,
     BlogComponent,
     BlogDetailComponent,
+    BlogImageArrayComponent,
     BlogNewComponent,
     SafeHtmlPipe,
     AdminToolbarComponent

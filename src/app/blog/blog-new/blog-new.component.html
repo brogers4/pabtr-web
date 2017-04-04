@@ -1,12 +1,12 @@
 <div class="new-blog-container">
   <h3>Create New Blog</h3>
-  <form (ngSubmit)="onSubmit(newBlogForm)" #newBlogForm="ngForm">
+  <div>
     <div class="form-group">
       <label>Title: </label>
       <input placeholder="Title" type="text" name="title" ngModel #titleInput="ngModel" required/>
-      <div [hidden]="titleInput.valid || titleInput.pristine">
+      <!-- <div [hidden]="titleInput.valid || titleInput.pristine">
         Title is required.
-      </div>
+      </div> -->
     </div>
 
     <!-- <div class="form-group">
@@ -18,6 +18,6 @@
       Hello Summernote!
     </div>
 
-    <button type="submit" [disabled]="!newBlogForm.form.valid">Submit</button>
-  </form>
+    <button type="submit">Submit</button>
+  </div>
 </div>
