@@ -11,7 +11,8 @@ import { AuthService } from './login/auth.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'My App';
+  title = 'Pastry Art';
+  subtitle = 'by Terri Rogers';
   loggedIn: Observable<Boolean>;
 
   constructor(

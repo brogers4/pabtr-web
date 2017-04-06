@@ -1,9 +1,11 @@
+@import "../app.variables";
+
 :host .admin-toolbar-container {
-  background: rgba(0,0,0,0.8);
+  background: $text-color;
   color: white;
-  margin: 10px 0;
-  padding: 4px;
-  border-radius: 2px;
+  // margin: 10px 0;
+  padding: 10px;
+  // border-radius: 2px;
   width: 100%;
   box-sizing: border-box;
   display: flex;

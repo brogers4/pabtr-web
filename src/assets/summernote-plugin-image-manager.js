@@ -27,6 +27,7 @@
       var $editor = context.layoutInfo.editor;
       var options = context.options;
       var imageList = [];
+      var newFile = null;
 
       // add hello button
       context.memo('button.image-manager', function () {
@@ -68,19 +69,36 @@
           imageListObs.subscribe(function(imageList) {
             console.log("imageList:",imageList);
             // self.$dialog.find("#blogImages").html(JSON.stringify(imageList));
+            self.$dialog.find("#blogImages").html("");
             for(var i=0; i<imageList.length; i++){
               var $img = self.$dialog.find("#blogImages").append('<div class="image-container">'+
                 '<img src="'+imageList[i].url+'" width="70" height="70"/>'+
                 '<div class="image-title">'+imageList[i].name+'</div>'+
               '</div>');
-
             }
+            $('#blogImages .image-container').click(function(e){
+              var images = $('#blogImages .image-container');
+              for(var i=0; i<images.length; i++){
+                $(images[i]).css({
+                  "background": "rgba(0,0,0,0.2)",
+                  "color": "inherit",
+                  "border": "2px solid transparent"
+                })
+              }
+              $(e.currentTarget).css({
+                "background": "black",
+                "color": "white",
+                "border": "2px solid black"
+              })
+            })
             $('#blogImages .image-container').css({
               "display": "inline-block",
               "background": "rgba(0,0,0,0.2)",
               "border-radius": "2px",
               "margin": "10px",
-              "overflow": "hidden"
+              "overflow": "hidden",
+              "cursor": "pointer",
+              "border": "2px solid transparent"
             });
             $('#blogImages img').css({
               "object-fit": "cover"
@@ -97,15 +115,29 @@
               "overflow": "hidden",
               "text-overflow": "ellipsis"
             })
+
+            
           })
         })
         var $container = options.dialogsInBody ? $(document.body) : $editor;
         var dialogOption = {
           title: 'Image Manager',
           body: '<div id="blogImages"></div>'+
+                '<div id="imagePreviewContainer">'+
+                  '<img id="imagePreview" height="100" src="#" style="display:inline-block;">'+
+                  '<div style="display:inline-block">'+
+                    '<div id="imagePreviewForm" class="form-group form-inline">'+
+                      '<label for="newImageTitle">Image Name</label>'+
+                      '<input class="form-control" type="text" id="newImageTitle"/>'+
+                      '<button id="imageUploadBtn" class="btn btn-primary">Upload Image</button>'+
+                    '</div>'+
+                  '</div>'+
+                '</div>'+
                 '<div class="form-group">'+
-                  '<button id="imageUploadBtn" class="btn btn-primary">Upload New Image</button>'+
-                  '<input type="file" id="imageUploadInput" accept="image/*" style="display:none" onchange="handleImageUpload(this.files)">'+
+                  '<label id="imageSelectBtn" class="btn btn-primary">'+
+                    'Select New Image'+
+                    '<input type="file" id="imageUploadInput" accept="image/*" style="display:none;">'+
+                  '</label>'+
                 '</div>'+
                 '<div class="form-group">'+
                   '<label for="urlInput">Image Source</label>'+
@@ -121,33 +153,38 @@
           "height": "100%"
         });
 
-        self.onUploadNewImage = function(e){
-          console.log("onUploadNewImage");
-          $('#blogImages #imageUploadInput').click();
-          // e.preventDefault();
+
+        self.handleImageUpload = function(file){
+          $("#imageUploadBtn").click(function(){
+            console.log("Uploading image to server now:",file);
+            var name = $("#newImageTitle").val();
+            console.log("name = ",name);
+            if(typeof name === "undefined"){
+              console.log("ERROR: Undefined name.");
+              return;
+            }
+            window["angularComponentRef"].zone.run(() => {
+              window["angularComponentRef"].component.uploadImage(file,name);
+            });
+          })
         }
-        self.handleImageUpload = function(e){
-          console.log("handleImageUpload");
-        }
-        $('#imageUploadBtn').click(function(e){
-          console.log("Clicked!");
-          self.onUploadNewImage(e);
-        })
-        $('#imageUploadInput').click(function(e){
-          console.log("imageUploadInput clicked!");
-          self.handleImageUpload();
+
+        $('#imageUploadInput').change(function(e){
+          console.log("imageUploadInput clicked!",e);
+          console.log("imageUploadInput files:",$("#imageUploadInput").get(0).files[0])
+          var file = $("#imageUploadInput").get(0).files[0];
+          var reader = new FileReader();
+          reader.onload = function(e){
+            $('#imagePreview').attr('src', e.target.result);
+            $('#imagePreviewContainer').css({
+              "display": "block"
+            })
+          }
+          reader.readAsDataURL(file);
+          $("#newImageTitle").val(file.name);
+          self.handleImageUpload(file);
         })
 
-        // this.$panel = $('<div class="image-manager-panel"/>').css({
-        //   position: 'absolute',
-        //   width: 100,
-        //   height: 100,
-        //   left: '50%',
-        //   top: '50%',
-        //   background: 'red'
-        // }).hide();
-        //
-        // this.$panel.appendTo('body');
       };
 
       this.showDialog = function(){

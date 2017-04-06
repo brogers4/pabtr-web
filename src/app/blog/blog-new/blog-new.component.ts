@@ -40,6 +40,16 @@ export class BlogNewComponent implements AfterViewInit, OnDestroy {
     return this.imageList;
   }
 
+  uploadImage(file, name){
+    this.fbStorageRef.child(file.name).put(file).then(function(snapshot){
+      var newRef = this.imageListObs.push();
+      newRef.set({
+        name: name,
+        url: snapshot.downloadURL
+      })
+    }.bind(this))
+  }
+
   getImageListObs(){
     console.log("In getImageListObs:",this.imageListObs);
     return this.imageListObs;
@@ -61,7 +71,7 @@ export class BlogNewComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(){
-    
+
   }
 
   createBlog(blog: Object){
