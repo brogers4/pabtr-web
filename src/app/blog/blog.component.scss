@@ -1,0 +1,5 @@
+@import '../app.variables';
+
+:host .title-banner {
+  @include title-banner;
+}

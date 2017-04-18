@@ -17,16 +17,28 @@
     display: flex;
     flex-direction: row;
     width: 100%;
-    padding: 10px;
-    background: $primary;
+    padding: 10px 10px 4px 10px;
+    // background: $primary;
     color: $secondary;
     position: relative;
     a {
       margin: 0 5px;
-      padding: 0 5px;
-      color: $secondary;
+      padding: 5px 10px;
+      color: $secondary-dark;
+      transition: all 0.2s ease-in-out;
       &.active {
-        background: $primary;
+        // background: $secondary;
+        // color: $primary;
+        color: $secondary;
+        box-shadow: 0 4px $secondary;
+      }
+      &:hover {
+        color: $secondary;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      &:focus, &:active {
+        text-decoration: none;
       }
     }
 
@@ -51,62 +63,10 @@
 }
 
 :host .banner-container {
-  position: relative;
-  background: $primary;
-  margin: 0 -10px;
-  padding: 0 10px;
-  &::before {
-    content: '';
-    width: 10px;
-    height: 10px;
-    position: absolute;
-    left: 0;
-    top: 100%;
-    border-right: 10px solid darken($primary,50);
-    border-bottom: 10px solid transparent;
+  @include header-banner;
+  .title {
+    padding: 20px 0 0 0;
   }
-
-  &::after {
-    content: '';
-    width: 10px;
-    height: 10px;
-    position: absolute;
-    right: 0;
-    top: 100%;
-    border-left: 10px solid darken($primary,50);
-    border-bottom: 10px solid transparent;
-  }
-}
-
-
-:host .title {
-  // margin: 0 -1000px 0 -1000px;
-  // padding: 30px 10px 15px 10px;
-  // padding: 10px;
-  // padding: 20px 1000px 0 1000px;
-  padding: 20px 0 0 0;
-  background: $primary;
-  position: relative;
-  h1 {
-    margin: 0;
-    display: inline-block;
-    color: $secondary;
-    font-size: 72px;
-    text-transform: uppercase;
-    letter-spacing: -6px;
-    font-family: sans-serif;
-    font-weight: 100;
-  }
-  h2 {
-    margin: 0;
-    display: inline-block;
-    margin-left: 10px;
-    font-size: 36px;
-    letter-spacing: 6px;
-    color: $text-accent;
-    font-weight: 100;
-  }
-
 }
 
 :host admin-toolbar {

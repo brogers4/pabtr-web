@@ -1,4 +1,8 @@
-<h3>My Blog</h3>
+<div class="title-banner">
+  <div class="title">
+    <h2>My Blog</h2>
+  </div>
+</div>
 <ul>
   <li *ngFor="let blog of blogs | async">
     <a [routerLink]="['/blog',blog.$key]">{{blog.title}}</a>

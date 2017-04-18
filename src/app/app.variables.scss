@@ -1,5 +1,86 @@
-$primary: rgb(250, 248, 101);
-$secondary: rgb(50, 194, 208);
+$primary: rgb(50, 194, 208);
+$primary-dark: darken($primary,10);
+$primary-light: lighten($primary,10);
+
+$secondary: rgb(250, 248, 101);
+$secondary-dark: darken($secondary,10);
+$secondary-light: lighten($secondary,10);
+
+$primary-gradient: linear-gradient(to top right, $primary-dark,$primary-light);
+$secondary-gradient: linear-gradient(to top right, $secondary-dark,$secondary-light);
 $primary-inverse: rgb(255,255,255);
 $text-color: rgb(78, 78, 73);
-$text-accent: rgba($text-color,0.5);
+// $text-accent: rgba($text-color,0.5);
+$text-accent: lighten($text-color,75);
+
+@mixin banner($bg,$h1-color,$h2-color,$gutter) {
+  position: relative;
+  background: linear-gradient(to top right, darken($bg,10), lighten($bg,10));
+  margin: 0 $gutter * -1;
+  padding: 0 $gutter;
+  &::before {
+    content: '';
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    border-right: 10px solid darken($bg,25);
+    border-bottom: 10px solid transparent;
+  }
+  &::after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    border-left: 10px solid darken($bg,25);
+    border-bottom: 10px solid transparent;
+  }
+  h1 {
+    margin: 0;
+    display: inline-block;
+    color: $h1-color;
+    font-size: 72px;
+    text-transform: uppercase;
+    letter-spacing: -2px;
+    font-family: sans-serif;
+    font-weight: 100;
+  }
+  h2 {
+    margin: 0;
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 36px;
+    letter-spacing: 6px;
+    color: $h2-color;
+    font-weight: 100;
+  }
+}
+
+@mixin down-banner($bg,$h1-color,$h2-color,$gutter) {
+  @include banner($bg,$h1-color,$h2-color,$gutter)
+  &::before {
+    border-bottom: 0;
+    border-top: 10px solid transparent;
+    top: -10px;
+  }
+  &::after {
+    border-bottom: 0;
+    border-top: 10px solid transparent;
+    top: -10px;
+  }
+}
+
+@mixin header-banner {
+  @include banner($primary,$secondary,$text-accent,10px);
+}
+
+@mixin title-banner {
+  @include down-banner($secondary,$primary,$primary,30px);
+  h2 {
+    font-size: 24px;
+    margin: 10px 0;
+  }
+}

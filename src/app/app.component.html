@@ -11,9 +11,9 @@
 
 
     <div class="nav">
-      <a routerLink="/home">Home</a>
-      <a routerLink="/blog">Blog</a>
-      <a routerLink="/login" *ngIf="!(loggedIn | async)">Log In</a>
+      <a routerLink="/home" routerLinkActive="active">Home</a>
+      <a routerLink="/blog" routerLinkActive="active">Blog</a>
+      <a routerLink="/login" *ngIf="!(loggedIn | async)" routerLinkActive="active">Log In</a>
     </div>
 
   </div>

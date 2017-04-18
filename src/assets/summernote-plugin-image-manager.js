@@ -90,6 +90,9 @@
                 "color": "white",
                 "border": "2px solid black"
               })
+              // console.log(e.currentTarget);
+              var src = $(e.currentTarget).find("img")[0].src;
+              $("#urlInput").val(src);
             })
             $('#blogImages .image-container').css({
               "display": "inline-block",
@@ -116,7 +119,7 @@
               "text-overflow": "ellipsis"
             })
 
-            
+
           })
         })
         var $container = options.dialogsInBody ? $(document.body) : $editor;
@@ -143,7 +146,7 @@
                   '<label for="urlInput">Image Source</label>'+
                   '<input class="form-control" type="text" placeholder="url" id="urlInput"/>'+
                 '</div>',
-          footer: '<button class="btn btn-primary">Add Image</button>',
+          footer: '<button class="btn btn-primary" id="addImageButton">Add Image</button>',
           closeOnEscape: true
         };
 
@@ -154,24 +157,21 @@
         });
 
 
-        self.handleImageUpload = function(file){
+        self.handleImageUpload = function(blob,file){
           $("#imageUploadBtn").click(function(){
-            console.log("Uploading image to server now:",file);
             var name = $("#newImageTitle").val();
-            console.log("name = ",name);
             if(typeof name === "undefined"){
               console.log("ERROR: Undefined name.");
               return;
             }
+
             window["angularComponentRef"].zone.run(() => {
-              window["angularComponentRef"].component.uploadImage(file,name);
+              window["angularComponentRef"].component.uploadImage(blob,name,file.name);
             });
           })
         }
 
         $('#imageUploadInput').change(function(e){
-          console.log("imageUploadInput clicked!",e);
-          console.log("imageUploadInput files:",$("#imageUploadInput").get(0).files[0])
           var file = $("#imageUploadInput").get(0).files[0];
           var reader = new FileReader();
           reader.onload = function(e){
@@ -179,10 +179,42 @@
             $('#imagePreviewContainer').css({
               "display": "block"
             })
+            $("#newImageTitle").val(file.name);
+            var img = new Image();
+            img.src = e.target.result;
+            var canvas = document.createElement("canvas");
+            var ctx = canvas.getContext("2d");
+            ctx.drawImage(img,0,0);
+            var MAX_WIDTH = 800;
+            var MAX_HEIGHT = 800;
+            var width = img.width;
+            var height = img.height;
+
+            if (width > height) {
+              if (width > MAX_WIDTH) {
+                height *= MAX_WIDTH / width;
+                width = MAX_WIDTH;
+              }
+            } else {
+              if (height > MAX_HEIGHT) {
+                width *= MAX_HEIGHT / height;
+                height = MAX_HEIGHT;
+              }
+            }
+            canvas.width = width;
+            canvas.height = height;
+            var ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0, width, height);
+            canvas.toBlob(function(blob){
+              self.handleImageUpload(blob,file);
+            })
           }
           reader.readAsDataURL(file);
-          $("#newImageTitle").val(file.name);
-          self.handleImageUpload(file);
+        });
+
+        $('#addImageButton').click(function(){
+          var url = $('#urlInput').val();
+          context.invoke('editor.insertImage',url);
         })
 
       };

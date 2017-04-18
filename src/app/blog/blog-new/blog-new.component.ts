@@ -40,18 +40,26 @@ export class BlogNewComponent implements AfterViewInit, OnDestroy {
     return this.imageList;
   }
 
-  uploadImage(file, name){
-    this.fbStorageRef.child(file.name).put(file).then(function(snapshot){
-      var newRef = this.imageListObs.push();
-      newRef.set({
-        name: name,
-        url: snapshot.downloadURL
-      })
+  uploadImage(blob, name, path){
+    var imageRef = this.fbStorageRef.child(path);
+    imageRef.getDownloadURL().then(function(existingUrl){
+      // Path already exists
+      console.warn("This file already exists.  Need to ask if we should overwrite or create new.");
+    }, function(error){
+      // Path doesn't exist yet
+      imageRef.put(blob).then(function(snapshot){
+        var newRef = this.imageListObs.push();
+        newRef.set({
+          name: name,
+          url: snapshot.downloadURL
+        })
+      }.bind(this))
     }.bind(this))
+
   }
 
   getImageListObs(){
-    console.log("In getImageListObs:",this.imageListObs);
+    // console.log("In getImageListObs:",this.imageListObs);
     return this.imageListObs;
   }
 
