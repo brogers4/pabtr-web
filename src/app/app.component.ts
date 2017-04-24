@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { Location } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
 import { AngularFire } from 'angularfire2';
 import { AuthService } from './login/auth.service';
@@ -11,8 +9,8 @@ import { AuthService } from './login/auth.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Pastry Art';
-  subtitle = 'by Terri Rogers';
+  title = 'My App';
+  subtitle = 'by Brandon Rogers';
   loggedIn: Observable<Boolean>;
 
   constructor(

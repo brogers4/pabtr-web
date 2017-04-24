@@ -2,11 +2,12 @@ $primary: rgb(50, 194, 208);
 $primary-dark: darken($primary,10);
 $primary-light: lighten($primary,10);
 
-$secondary: rgb(250, 248, 101);
+$secondary: rgb(234, 216, 75);
 $secondary-dark: darken($secondary,10);
 $secondary-light: lighten($secondary,10);
 
 $primary-gradient: linear-gradient(to top right, $primary-dark,$primary-light);
+$primary-gradient-transparent: linear-gradient(to top right, transparentize($primary-dark,0.05), transparentize($primary-light,0.05));
 $secondary-gradient: linear-gradient(to top right, $secondary-dark,$secondary-light);
 $primary-inverse: rgb(255,255,255);
 $text-color: rgb(78, 78, 73);

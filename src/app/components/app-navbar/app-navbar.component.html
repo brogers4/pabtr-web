@@ -1,0 +1,15 @@
+<div class="nav">
+  <a routerLink="/home" routerLinkActive="active">Home</a>
+  <a routerLink="/blog" routerLinkActive="active">Blog</a>
+  <a routerLink="/login" *ngIf="!(loggedIn | async)" routerLinkActive="active">Log In</a>
+  <span class="spacer"></span>
+  <!-- <iron-icon icon="icons:account-box"></iron-icon> -->
+  <md-menu #adminMenu="mdMenu">
+    <button md-menu-item>Create New Blog</button>
+    <button md-menu-item>Log Out</button>
+  </md-menu>
+  <button md-icon-button [mdMenuTriggerFor]="adminMenu">
+    <!-- <iron-icon icon="icons:account-box"></iron-icon> -->
+    <md-icon>more_vert</md-icon>
+  </button>
+</div>

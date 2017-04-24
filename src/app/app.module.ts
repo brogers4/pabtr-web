@@ -2,7 +2,7 @@ import 'hammerjs';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
@@ -19,6 +19,7 @@ import { BlogNewComponent } from './blog/blog-new/blog-new.component';
 import { BlogImageArrayComponent } from './blog/blog-image-array/blog-image-array.component';
 
 import { AdminToolbarComponent } from './admin/admin-toolbar.component';
+import { AppNavbarComponent } from './components/app-navbar/app-navbar.component';
 
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 
@@ -51,13 +52,14 @@ export const firebaseAuthConfig = {
     BlogImageArrayComponent,
     BlogNewComponent,
     SafeHtmlPipe,
-    AdminToolbarComponent
+    AdminToolbarComponent,
+    AppNavbarComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    MaterialModule,
+    MaterialModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig,firebaseAuthConfig),
     AppRoutingModule
   ],
@@ -65,6 +67,7 @@ export const firebaseAuthConfig = {
     BlogService,
     AuthService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule { }

@@ -2,48 +2,26 @@
 
 :host {
   overflow-x: hidden;
-  height: 100%;
+  // height: 100%;
   overflow-y: auto;
   display: flex;
-  align-items: center;
-  align-content: center;
+  // align-items: center;
+  // align-content: center;
   // padding: 10px;
   flex-direction: column;
   color: $text-color;
   background: rgba(0,0,0,0.05);
 
-  .nav {
+  app-header-layout {
     flex: 1 0 auto;
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    padding: 10px 10px 4px 10px;
-    // background: $primary;
-    color: $secondary;
-    position: relative;
-    a {
-      margin: 0 5px;
-      padding: 5px 10px;
-      color: $secondary-dark;
-      transition: all 0.2s ease-in-out;
-      &.active {
-        // background: $secondary;
-        // color: $primary;
-        color: $secondary;
-        box-shadow: 0 4px $secondary;
-      }
-      &:hover {
-        color: $secondary;
-        text-decoration: none;
-        cursor: pointer;
-      }
-      &:focus, &:active {
-        text-decoration: none;
-      }
-    }
-
-
   }
+
+  app-header {
+    // flex: 1 0 auto;
+    background: $primary-gradient;
+  }
+
+
 
   .main-container {
     background: white;
@@ -58,6 +36,86 @@
       box-sizing: border-box;
 
 
+    }
+  }
+}
+
+:host .nav-float-box {
+  visibility: hidden;
+  position: fixed;
+  background: $primary-gradient-transparent;
+  // box-shadow: 0px 5px 6px -3px rgba(0, 0, 0, 0.4);
+  top: -64px;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  transition: all 0.2s ease-in-out;
+
+  > app-toolbar {
+    position: relative;
+    &::before {
+      position: absolute;
+      right: 0px;
+      bottom: -5px;
+      left: 0px;
+      width: 100%;
+      height: 5px;
+      content: "";
+      pointer-events: none;
+      box-shadow: inset 0px 5px 6px -3px rgba(0, 0, 0, 0.4);
+    }
+  }
+  &[threshold-triggered] {
+    visibility: visible;
+    top: 0;
+    opacity: 1;
+  }
+}
+
+:host app-toolbar {
+  &.top-toolbar {
+    // display: block;
+    height: 60px;
+  }
+  &.bottom-toolbar {
+    // display: block;
+    height: 120px;
+  }
+}
+
+:host .title {
+  color: $secondary;
+  // font-size: 120px;
+  padding: 10px;
+  h1 {
+    margin: 0;
+    display: inline-block;
+    color: $secondary;
+    font-size: 72px;
+    text-transform: uppercase;
+    letter-spacing: -2px;
+    font-family: sans-serif;
+    font-weight: 100;
+    vertical-align: middle;
+  }
+  h2 {
+    margin: 0;
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 36px;
+    letter-spacing: 6px;
+    color: $text-accent;
+    font-weight: 100;
+    vertical-align: bottom;
+    line-height: 56px;
+  }
+  &[condensed-title] {
+    font-size: 60px;
+    h1 {
+      font-size: 36px;
+    }
+    h2 {
+      font-size: 18px;
     }
   }
 }

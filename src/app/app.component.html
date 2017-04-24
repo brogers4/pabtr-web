@@ -1,4 +1,4 @@
-<admin-toolbar></admin-toolbar>
+<!-- <admin-toolbar></admin-toolbar>
 
 <div class="main-container">
 
@@ -22,4 +22,71 @@
     <router-outlet></router-outlet>
   </div>
 
-</div>
+</div> -->
+
+<app-header-layout>
+  <!-- <app-header effects="resize-title" condenses fixed>
+    <app-toolbar class="top-toolbar" sticky>
+        <div condensed-title class="title">
+          <img src="./assets/images/wiskandspatula.png" height="36">
+          <h1>{{title}}</h1>
+          <h2>{{subtitle}}</h2>
+
+        </div>
+
+        <div class="nav" bottom-item>
+          <a routerLink="/home" routerLinkActive="active">Home</a>
+          <a routerLink="/blog" routerLinkActive="active">Blog</a>
+          <a routerLink="/login" *ngIf="!(loggedIn | async)" routerLinkActive="active">Log In</a>
+        </div>
+
+    </app-toolbar>
+    <app-toolbar class="bottom-toolbar">
+
+      <div main-title class="title">
+        <img src="./assets/images/wiskandspatula.png" height="72">
+        <h1>{{title}}</h1>
+        <h2>{{subtitle}}</h2>
+
+      </div>
+
+
+    </app-toolbar>
+
+
+  </app-header> -->
+  <app-header shadow>
+    <app-toolbar></app-toolbar>
+    <app-toolbar class="bottom-toolbar">
+      <div class="title">
+        <span class="title-image">
+          <img src="./assets/images/wiskandspatula.png" height="72">
+        </span>
+
+        <h1>{{title}}</h1>
+        <h2>{{subtitle}}</h2>
+
+      </div>
+    </app-toolbar>
+    <app-toolbar>
+      <app-navbar></app-navbar>
+    </app-toolbar>
+  </app-header>
+
+  <app-box threshold="248" class="nav-float-box">
+    <app-toolbar>
+      <img src="./assets/images/wiskandspatula.png" height="36">
+      <app-navbar></app-navbar>
+    </app-toolbar>
+  </app-box>
+
+
+  <div class="content">
+    <admin-toolbar></admin-toolbar>
+
+    <div class="main-content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+
+</app-header-layout>
